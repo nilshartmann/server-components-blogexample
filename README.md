@@ -1,5 +1,12 @@
 # React Server Components - Blog Example
 
+## Start and init database
+
+```
+cd docker
+docker-compose -f docker-compose.yml up -d
+```
+
 # React Server Components Demo
 
 * [What is this?](#what-is-this)

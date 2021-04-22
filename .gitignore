@@ -12,9 +12,6 @@
 /build
 /dist
 
-# notes
-notes/*.md
-
 # misc
 .DS_Store
 .eslintcache
@@ -28,5 +25,3 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# vscode
-.vscode

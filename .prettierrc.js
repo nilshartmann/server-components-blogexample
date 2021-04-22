@@ -9,10 +9,9 @@
 'use strict';
 
 module.exports = {
-  arrowParens: 'always',
-  bracketSpacing: false,
-  singleQuote: true,
-  jsxBracketSameLine: true,
-  trailingComma: 'es5',
-  printWidth: 80,
+  "endOfLine": "lf",
+  "printWidth": 120,
+  "trailingComma": "none",
+  "arrowParens": "always",
+  "bracketSpacing": true
 };
