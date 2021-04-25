@@ -12,10 +12,11 @@ import { ErrorBoundary } from "react-error-boundary";
 import BlogServerContent from "./client/BlogServerContent.client";
 
 /**
- * Root of our Application:
+ * Root of our (Client-side) Application:
  *
  * - Responsible for rendering an ErrorBoundary (in case something fails during rendering).
  * - Renders Supsense Component that displays Waiting Message while content (from Server) is loading
+ * - Embedds the BlogServerContent component that itself reads components from the server
  */
 export default function Root() {
   return (

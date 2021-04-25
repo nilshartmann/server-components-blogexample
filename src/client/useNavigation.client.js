@@ -1,6 +1,13 @@
 import { useContext } from "react";
 import { BlogLocationContext } from "./BlogLocationContext.client";
 
+/**
+ * A client-side hook that provides functions to update the global location object
+ * (from BlogLocationContext)
+ *
+ * While it's mainly a wrapper around the `setLocation` function from the context,
+ * it provides more meaningful function (names)
+ */
 export function useBlogNavigation() {
   const [location, setLocation] = useContext(BlogLocationContext);
 

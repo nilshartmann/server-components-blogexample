@@ -4,18 +4,18 @@ import { BlogLocationContext } from "./BlogLocationContext.client";
 
 /** Holds our Location and connects to the server
  *
- * - The Location Object contains everything the server needs, it's provided to the client-side App using a Context (LocationContext),
- *   including a set-Function to change it's value
+ * - The BlogLocation Object contains everything the server needs, it's provided to the client-side App using a Context (BlogLocationContext),
+ *   including various functions to change it's value
  * - It will be serialized and sent to the server
  * - on server side it gets deserialized and passed as props to the Server's Root Component
- * - after processing the server-side code, the server sends back new UI information and also a new LocationObject
+ * - after processing the server-side code, the server sends back new UI information and also a new BlogLocation object
  *
  * Location and Re-rendering
  * - the Location object also acts as a cache key. In `Cache.client.js` there is a global client-wide Cache,
  * that holds the server responses.
- * - If this component (Content) is re-rendered, no server roundtrip is done, as long as the cache contains
+ * - If this component (`BlogServerContent`) is re-rendered, no server roundtrip is done, as long as the cache contains
  * an object matchting the current location object
- * - On the other hand: if the (Client-)App changes the LocationObject, a new Server roundtrip is done and the app
+ * - On the other hand: if the (Client-)App changes the `BlogLocationObject`, a new Server roundtrip is done and the app
  *   is re-rendered. That is the same behaviour as with "classic" React application, except that - as part of the
  *   rendering - a server call is made and some of the components in the tree are executed on server
  *

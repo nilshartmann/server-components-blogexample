@@ -9,6 +9,11 @@
 import { unstable_getCacheForType, unstable_useCacheRefresh } from "react";
 import { createFromFetch } from "react-server-dom-webpack";
 
+/**
+ * Contains all UI fragments read from the server.
+ * The key is the serialized BlogLocation object
+ * @returns {Map<any, any>}
+ */
 function createResponseCache() {
   return new Map();
 }

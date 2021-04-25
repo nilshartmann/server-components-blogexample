@@ -8,16 +8,26 @@
 
 import { Suspense } from "react";
 
-import Note from "./server/Note.server";
-import NoteList from "./server/NoteList.server";
-import EditButton from "./client/EditButton.client";
-import SearchField from "./client/SearchField.client";
-import NoteSkeleton from "./shared/NoteSkeleton";
-import NoteListSkeleton from "./shared/NoteListSkeleton";
 import PostListPage from "./server/PostListPage.server";
 import PostPage from "./server/PostPage.server";
-import PostEditorClient from "./client/PostEditor";
+import PostEditorClient from "./client/PostEditor.client";
 
+/**
+ * This is the entry point for components that are executed
+ * on server side.
+ *
+ * - The server receives properties via URL parameter
+ * - Depending on the URL that is invoked on the server, this App
+ *   component is returned with unchanged properties
+ * - OR business logic is executed (store a new Blog Post) and then
+ *   this component is executed
+ * - the Server specifies it's properties (as you would do, if you render
+ *   a component on client-site).
+ * - the Server is free to determine the properties itself, it might use
+ *   information it received from the client request or it computes its own
+ *   properties and passes them to App
+ *
+ */
 export default function App({ postId, editorOpen }) {
   if (editorOpen) {
     return <PostEditorClient />;

@@ -5,6 +5,16 @@ import Message from "../shared/Message";
 import { createFromReadableStream } from "react-server-dom-webpack";
 import { useUpdateServerComponentCache } from "./Cache.client";
 
+/**
+ * Lets the user enter a new blog post
+ *
+ * After pressing the Save button the new post is sent to the server
+ * using an HTTP POST request using the Browser `fetch` API. Nothing special here.
+ *
+ * BUT: the server not returns a Status Code or Data (as we'd expect from for example
+ * a REST API), but it returns new UI Code (App.server component) with the updated
+ * Component tree!
+ */
 export default function PostEditor() {
   const updateServerComponentCache = useUpdateServerComponentCache();
   const { openHome, homeLocation, setLocationFromServerResponse } = useBlogNavigation();
@@ -29,8 +39,15 @@ export default function PostEditor() {
       homeLocation()
     );
 
+    // The server sent back new UI
+    // we put it to the cache (replacing the previous ui for the
+    //  returned location object)
+    //
     const seededResponse = createFromReadableStream(response);
     updateServerComponentCache(location, seededResponse);
+
+    // Set new "global" location to our BlogLocationContext
+    //   -> re-renders application, new UI gets visible
     setLocationFromServerResponse(location);
   }
 
