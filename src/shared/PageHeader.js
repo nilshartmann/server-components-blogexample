@@ -1,6 +1,3 @@
-import HomeButton from "../client/HomeButton.client";
-import OpenPostEditorButton from "../client/OpenPostEditorButton.client";
-
 /**
  * Displays a header for each page, including some buttons (optionally)
  *
@@ -10,14 +7,11 @@ import OpenPostEditorButton from "../client/OpenPostEditorButton.client";
  * The included PageTitle on the other hand is rendered on server side,
  * so its code won't be sent to the client.
  */
-export default function PageHeader({ children, renderHomeButton, withOpenEditorButton }) {
+export default function PageHeader({ children, button }) {
   return (
     <div className={"PageHeader"}>
       <PageTitle>{children}</PageTitle>
-      <div>
-        {renderHomeButton && <HomeButton />}
-        {withOpenEditorButton && <OpenPostEditorButton />}
-      </div>
+      {!!button && <div>{button}</div>}
     </div>
   );
 }

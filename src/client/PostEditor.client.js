@@ -3,18 +3,19 @@ import { useBlogNavigation } from "./useNavigation.client";
 import Message from "../shared/Message";
 import { createFromReadableStream } from "react-server-dom-webpack";
 import { useUpdateServerComponentCache } from "./Cache.client";
+import PageHeader from "../shared/PageHeader";
 
 // EXAMPLE: if using 'shared/PageHeader' component, code splitting
 // does not work an PostEditor is included in one of the inital bundles
 // (the PostEditor component is the ony CLIENT component that includes
 //  PageHeader, might be the reason...)
-function PageHeader({ children }) {
-  return (
-    <div className={"PageHeader"}>
-      <h1>{children}</h1>
-    </div>
-  );
-}
+//function PageHeader({ children }) {
+//  return (
+//    <div className={"PageHeader"}>
+//      <h1>{children}</h1>
+//    </div>
+//  );
+//}
 
 /**
  * Lets the user enter a new blog post

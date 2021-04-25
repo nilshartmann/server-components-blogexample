@@ -1,5 +1,4 @@
 import { asPlainBlogObject, db } from "./db.server";
-import PageHeader from "../shared/PageHeader";
 import PostPreview from "../shared/PostPreview";
 import { fetch } from "react-fetch";
 

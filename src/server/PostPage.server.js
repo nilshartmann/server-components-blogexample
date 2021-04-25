@@ -1,6 +1,7 @@
 import { asPlainBlogObject, db } from "./db.server";
 import PageHeader from "../shared/PageHeader";
 import Post from "../shared/Post";
+import HomeButton from "../client/HomeButton.client";
 
 export default function PostPage({ postId }) {
   // 😱   😱   😱   😱   😱   😱
@@ -11,7 +12,7 @@ export default function PostPage({ postId }) {
   const post = asPlainBlogObject(row);
   return (
     <>
-      <PageHeader renderHomeButton>Blog Post</PageHeader>
+      <PageHeader button={<HomeButton />}>Blog Post</PageHeader>
       <Post post={post} />
     </>
   );
