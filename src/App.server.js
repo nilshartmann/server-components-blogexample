@@ -11,6 +11,8 @@ import { Suspense } from "react";
 import PostListPage from "./server/PostListPage.server";
 import PostPage from "./server/PostPage.server";
 import PostEditorClient from "./client/PostEditor.client";
+import TagCloud from "./server/TagCloud.server";
+import LoadingIndicator from "./shared/LoadingIndicator";
 
 /**
  * This is the entry point for components that are executed

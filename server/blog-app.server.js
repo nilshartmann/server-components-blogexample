@@ -42,6 +42,7 @@ app.get(
 // returns the root Server Component of our App
 app.get("/react", function(req, res) {
   sendResponse(req, res, null);
+  //  setTimeout(() => sendResponse(req, res, null), 2000);
 });
 
 // contains the "data" endpoints
@@ -49,6 +50,8 @@ app.get("/react", function(req, res) {
 //  but RETURN react components/ui
 createBlogEndpoints(app);
 
+//
+// dummy endpoint to simulate slow responses
 app.get("/sleep/:ms", function(req, res) {
   setTimeout(() => {
     res.json({ ok: true });

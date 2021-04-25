@@ -8,7 +8,7 @@ import OpenPostEditorButton from "../client/OpenPostEditorButton.client";
  * as the Buttons are Client-side components.
  *
  * The included PageTitle on the other hand is rendered on server side,
- * so it's code won't be sent to the client.
+ * so its code won't be sent to the client.
  */
 export default function PageHeader({ children, renderHomeButton, withOpenEditorButton }) {
   return (

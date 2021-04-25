@@ -114,7 +114,7 @@ label {
 #root {
   margin: 0 auto;
   width: 100%;
-  max-width: 960px;
+  max-width: 1200px;
 
   padding: 14px;
 }
@@ -167,3 +167,127 @@ article h1 {
   display: flex;
   justify-content: space-between;
 }
+
+
+.Page {
+    display: flex;
+    align-items: flex-start;
+}
+
+.Main {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 75%;
+
+    margin-right: 1rem;
+}
+
+
+.Sidebar {
+    width: 100%;
+    margin-top: 1.5rem;
+    padding: 0.5rem;
+    background-color: var(--grey-1);
+    margin-left: 1rem;
+    max-height: 100%;
+}
+
+
+.Sidebar .Spinner {
+    padding: 0 0.5rem 0.5rem 0.5rem;
+    font-size: 50%;
+}
+
+.TagCloud {
+    text-align: center;
+}
+.TagCloud > * {
+    background-color: var(--grey-2);
+    display: inline-block;
+    border-radius: 10%;
+}
+
+.TagCloud > .TagCloud--tag-3 {
+    padding: 0.5rem;
+    margin: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.TagCloud > .TagCloud--tag-2 {
+    padding: 0.5rem;
+    margin: 0.4rem;
+    font-size: 1rem;
+}
+
+.TagCloud > .TagCloud--tag-1 {
+    padding: 0.4rem;
+    margin: 0.3rem;
+    font-size: 0.8rem;
+}
+
+.TagCloud > .TagCloud--tag-0 {
+    padding: 0.3rem;
+    margin: 0.2rem;
+    font-size: 0.7rem;
+}
+
+/* Spinner CSS taken from: http://tobiasahlin.com/spinkit/ */
+.Spinner {
+    margin: auto 0;
+    width: 100%;
+    text-align: center;
+    padding: 0 2rem 1rem 2rem;
+}
+
+.Spinner h1 {
+    font-size: 1.5rem;
+}
+
+.Spinner > .bounce {
+    width: 1.2em;
+    height: 1.2em;
+    margin-right: 1.2em;
+    background-color: var(--color-primary);
+
+    border-radius: 100%;
+    display: inline-block;
+    -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+    animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+}
+
+.Spinner .bounce1 {
+    -webkit-animation-delay: -0.32s;
+    animation-delay: -0.32s;
+}
+
+.Spinner .bounce2 {
+    -webkit-animation-delay: -0.16s;
+    animation-delay: -0.16s;
+}
+
+@-webkit-keyframes sk-bouncedelay {
+    0%,
+    80%,
+    100% {
+        -webkit-transform: scale(0);
+    }
+
+    40% {
+        -webkit-transform: scale(1);
+    }
+}
+
+@keyframes sk-bouncedelay {
+    0%,
+    80%,
+    100% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+    }
+
+    40% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+

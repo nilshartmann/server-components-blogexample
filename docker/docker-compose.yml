@@ -10,5 +10,5 @@ services:
       - POSTGRES_USER=klaus
       - POSTGRES_DB=blog_db
     volumes:
-      - ./init-project-db.sql:/docker-entrypoint-initdb.d/init-blog-db.sql
+      - ./init-blog-db.sql:/docker-entrypoint-initdb.d/init-blog-db.sql
       - ./db-data:/var/lib/postgresql/data
