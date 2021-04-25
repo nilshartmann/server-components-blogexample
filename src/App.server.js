@@ -6,45 +6,34 @@
  *
  */
 
-import {Suspense} from 'react';
+import { Suspense } from "react";
 
-import Note from './Note.server';
-import NoteList from './NoteList.server';
-import EditButton from './EditButton.client';
-import SearchField from './SearchField.client';
-import NoteSkeleton from './NoteSkeleton';
-import NoteListSkeleton from './NoteListSkeleton';
+import Note from "./server/Note.server";
+import NoteList from "./server/NoteList.server";
+import EditButton from "./client/EditButton.client";
+import SearchField from "./client/SearchField.client";
+import NoteSkeleton from "./shared/NoteSkeleton";
+import NoteListSkeleton from "./shared/NoteListSkeleton";
+import PostListPage from "./server/PostListPage.server";
+import PostPage from "./server/PostPage.server";
+import PostEditorClient from "./client/PostEditor";
 
-export default function App({selectedId, isEditing, searchText}) {
+export default function App({ postId, editorOpen }) {
+  if (editorOpen) {
+    return <PostEditorClient />;
+  }
+
   return (
-    <div className="main">
-      <section className="col sidebar">
-        <section className="sidebar-header">
-          <img
-            className="logo"
-            src="logo.svg"
-            width="22px"
-            height="20px"
-            alt=""
-            role="presentation"
-          />
-          <strong>React Notes</strong>
-        </section>
-        <section className="sidebar-menu" role="menubar">
-          <SearchField />
-          <EditButton noteId={null}>New</EditButton>
-        </section>
-        <nav>
-          <Suspense fallback={<NoteListSkeleton />}>
-            <NoteList searchText={searchText} />
-          </Suspense>
-        </nav>
-      </section>
-      <section key={selectedId} className="col note-viewer">
-        <Suspense fallback={<NoteSkeleton isEditing={isEditing} />}>
-          <Note selectedId={selectedId} isEditing={isEditing} />
+    <div className={"App"}>
+      {postId === null ? (
+        <Suspense fallback={"Post List Loading..."}>
+          <PostListPage />
         </Suspense>
-      </section>
+      ) : (
+        <Suspense fallback={"Blog Post Loading ..."}>
+          <PostPage postId={postId} />
+        </Suspense>
+      )}
     </div>
   );
 }

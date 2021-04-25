@@ -6,31 +6,29 @@
  *
  */
 
-import {unstable_useTransition} from 'react';
+import { unstable_useTransition } from "react";
 
-import {useLocation} from './LocationContext.client';
+import { BlogLocationContext } from "./BlogLocationContext.client";
 
-export default function EditButton({noteId, children}) {
-  const [, setLocation] = useLocation();
+export default function EditButton({ noteId, children }) {
+  const [, setLocation] = useBlogLocation();
   const [startTransition, isPending] = unstable_useTransition();
   const isDraft = noteId == null;
   return (
     <button
-      className={[
-        'edit-button',
-        isDraft ? 'edit-button--solid' : 'edit-button--outline',
-      ].join(' ')}
+      className={["edit-button", isDraft ? "edit-button--solid" : "edit-button--outline"].join(" ")}
       disabled={isPending}
       onClick={() => {
         startTransition(() => {
           setLocation((loc) => ({
             selectedId: noteId,
             isEditing: true,
-            searchText: loc.searchText,
+            searchText: loc.searchText
           }));
         });
       }}
-      role="menuitem">
+      role="menuitem"
+    >
       {children}
     </button>
   );

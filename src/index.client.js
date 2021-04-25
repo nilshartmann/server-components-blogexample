@@ -6,9 +6,11 @@
  *
  */
 
-import {unstable_createRoot} from 'react-dom';
-import Root from './Root.client';
+import { unstable_createRoot } from "react-dom";
+import Root from "./Root.client";
 
-const initialCache = new Map();
-const root = unstable_createRoot(document.getElementById('root'));
-root.render(<Root initialCache={initialCache} />);
+// unstable createRoot enables Concurrent Mode (more a less replacement for ReactDOM.render)
+// https://reactjs.org/docs/concurrent-mode-adoption.html#enabling-concurrent-mode
+const root = unstable_createRoot(document.getElementById("root"));
+
+root.render(<Root />);

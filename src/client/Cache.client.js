@@ -13,14 +13,17 @@ function createResponseCache() {
   return new Map();
 }
 
-export function useRefresh() {
+/** Update/replace a cached UI fragment with a new UI fragment read as response
+ * from a server call
+ */
+export function useUpdateServerComponentCache() {
   const refreshCache = unstable_useCacheRefresh();
-  return function refresh(key, seededResponse) {
+  return function updateCache(key, seededResponse) {
     refreshCache(createResponseCache, new Map([[key, seededResponse]]));
   };
 }
 
-export function useServerResponse(location) {
+export function useServerComponent(location) {
   const key = JSON.stringify(location);
   const cache = unstable_getCacheForType(createResponseCache);
   let response = cache.get(key);

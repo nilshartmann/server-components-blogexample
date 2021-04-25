@@ -6,9 +6,6 @@
  *
  */
 
-import {createContext, useContext} from 'react';
+import { createContext } from "react";
 
-export const LocationContext = createContext();
-export function useLocation() {
-  return useContext(LocationContext);
-}
+export const BlogLocationContext = createContext();

@@ -6,12 +6,12 @@
  *
  */
 
-import {useState, useRef, useEffect, unstable_useTransition} from 'react';
+import { useState, useRef, useEffect, unstable_useTransition } from "react";
 
-import {useLocation} from './LocationContext.client';
+import { useBlogLocation } from "./BlogLocationContext.client";
 
-export default function SidebarNote({id, title, children, expandedChildren}) {
-  const [location, setLocation] = useLocation();
+export default function SidebarNote({ id, title, children, expandedChildren }) {
+  const [location, setLocation] = useBlogLocation();
   const [startTransition, isPending] = unstable_useTransition();
   const [isExpanded, setIsExpanded] = useState(false);
   const isActive = id === location.selectedId;
@@ -22,7 +22,7 @@ export default function SidebarNote({id, title, children, expandedChildren}) {
   useEffect(() => {
     if (title !== prevTitleRef.current) {
       prevTitleRef.current = title;
-      itemRef.current.classList.add('flash');
+      itemRef.current.classList.add("flash");
     }
   }, [title]);
 
@@ -30,34 +30,27 @@ export default function SidebarNote({id, title, children, expandedChildren}) {
     <div
       ref={itemRef}
       onAnimationEnd={() => {
-        itemRef.current.classList.remove('flash');
+        itemRef.current.classList.remove("flash");
       }}
-      className={[
-        'sidebar-note-list-item',
-        isExpanded ? 'note-expanded' : '',
-      ].join(' ')}>
+      className={["sidebar-note-list-item", isExpanded ? "note-expanded" : ""].join(" ")}
+    >
       {children}
       <button
         className="sidebar-note-open"
         style={{
-          backgroundColor: isPending
-            ? 'var(--gray-80)'
-            : isActive
-            ? 'var(--tertiary-blue)'
-            : '',
-          border: isActive
-            ? '1px solid var(--primary-border)'
-            : '1px solid transparent',
+          backgroundColor: isPending ? "var(--gray-80)" : isActive ? "var(--tertiary-blue)" : "",
+          border: isActive ? "1px solid var(--primary-border)" : "1px solid transparent"
         }}
         onClick={() => {
           startTransition(() => {
             setLocation((loc) => ({
               selectedId: id,
               isEditing: false,
-              searchText: loc.searchText,
+              searchText: loc.searchText
             }));
           });
-        }}>
+        }}
+      >
         Open note for preview
       </button>
       <button
@@ -65,14 +58,10 @@ export default function SidebarNote({id, title, children, expandedChildren}) {
         onClick={(e) => {
           e.stopPropagation();
           setIsExpanded(!isExpanded);
-        }}>
+        }}
+      >
         {isExpanded ? (
-          <img
-            src="chevron-down.svg"
-            width="10px"
-            height="10px"
-            alt="Collapse"
-          />
+          <img src="chevron-down.svg" width="10px" height="10px" alt="Collapse" />
         ) : (
           <img src="chevron-up.svg" width="10px" height="10px" alt="Expand" />
         )}

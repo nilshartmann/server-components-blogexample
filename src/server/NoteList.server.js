@@ -9,7 +9,7 @@
 import {fetch} from 'react-fetch';
 
 import {db} from './db.server';
-import SidebarNote from './SidebarNote';
+import SidebarNote from '../shared/SidebarNote';
 
 export default function NoteList({searchText}) {
   // const notes = fetch('http://localhost:4000/notes').json();

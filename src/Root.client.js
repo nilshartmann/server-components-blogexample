@@ -6,41 +6,32 @@
  *
  */
 
-import {useState, Suspense} from 'react';
-import {ErrorBoundary} from 'react-error-boundary';
+import { Suspense } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 
-import {useServerResponse} from './Cache.client';
-import {LocationContext} from './LocationContext.client';
+import BlogServerContent from "./client/BlogServerContent.client";
 
-export default function Root({initialCache}) {
+/**
+ * Root of our Application:
+ *
+ * - Responsible for rendering an ErrorBoundary (in case something fails during rendering).
+ * - Renders Supsense Component that displays Waiting Message while content (from Server) is loading
+ */
+export default function Root() {
   return (
-    <Suspense fallback={null}>
+    <Suspense fallback={<h1>Application loading...</h1>}>
       <ErrorBoundary FallbackComponent={Error}>
-        <Content />
+        <BlogServerContent />
       </ErrorBoundary>
     </Suspense>
   );
 }
 
-function Content() {
-  const [location, setLocation] = useState({
-    selectedId: null,
-    isEditing: false,
-    searchText: '',
-  });
-  const response = useServerResponse(location);
-  return (
-    <LocationContext.Provider value={[location, setLocation]}>
-      {response.readRoot()}
-    </LocationContext.Provider>
-  );
-}
-
-function Error({error}) {
+function Error({ error }) {
   return (
     <div>
       <h1>Application Error</h1>
-      <pre style={{whiteSpace: 'pre-wrap'}}>{error.stack}</pre>
+      <pre style={{ whiteSpace: "pre-wrap" }}>{error.stack}</pre>
     </div>
   );
 }

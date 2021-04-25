@@ -6,15 +6,15 @@
  *
  */
 
-import {useState, unstable_useTransition} from 'react';
+import { useState, unstable_useTransition } from "react";
 
-import {useLocation} from './LocationContext.client';
-import Spinner from './Spinner';
+import { useBlogLocation } from "./BlogLocationContext.client";
+import Spinner from "../shared/Spinner";
 
 export default function SearchField() {
-  const [text, setText] = useState('');
+  const [text, setText] = useState("");
   const [startSearching, isSearching] = unstable_useTransition(false);
-  const [, setLocation] = useLocation();
+  const [, setLocation] = useBlogLocation();
   return (
     <form className="search" role="search" onSubmit={(e) => e.preventDefault()}>
       <label className="offscreen" htmlFor="sidebar-search-input">
@@ -30,7 +30,7 @@ export default function SearchField() {
           startSearching(() => {
             setLocation((loc) => ({
               ...loc,
-              searchText: newText,
+              searchText: newText
             }));
           });
         }}

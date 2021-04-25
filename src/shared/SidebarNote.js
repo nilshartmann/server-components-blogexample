@@ -10,7 +10,7 @@ import {format, isToday} from 'date-fns';
 import excerpts from 'excerpts';
 import marked from 'marked';
 
-import ClientSidebarNote from './SidebarNote.client';
+import ClientSidebarNote from '../client/SidebarNote.client';
 
 export default function SidebarNote({note}) {
   const updatedAt = new Date(note.updated_at);

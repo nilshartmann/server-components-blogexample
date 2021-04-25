@@ -6,34 +6,34 @@
  *
  */
 
-import {useState, unstable_useTransition} from 'react';
-import {createFromReadableStream} from 'react-server-dom-webpack';
+import { useState, unstable_useTransition } from "react";
+import { createFromReadableStream } from "react-server-dom-webpack";
 
-import NotePreview from './NotePreview';
-import {useRefresh} from './Cache.client';
-import {useLocation} from './LocationContext.client';
+import NotePreview from "../shared/NotePreview";
+import { useUpdateServerCache } from "./Cache.client";
+import { useBlogLocation } from "./BlogLocationContext.client";
 
-export default function NoteEditor({noteId, initialTitle, initialBody}) {
-  const refresh = useRefresh();
+export default function NoteEditor({ noteId, initialTitle, initialBody }) {
+  const refresh = useUpdateServerCache();
   const [title, setTitle] = useState(initialTitle);
   const [body, setBody] = useState(initialBody);
-  const [location, setLocation] = useLocation();
+  const [location, setLocation] = useBlogLocation();
   const [startNavigating, isNavigating] = unstable_useTransition();
   const [isSaving, saveNote] = useMutation({
     endpoint: noteId !== null ? `/notes/${noteId}` : `/notes`,
-    method: noteId !== null ? 'PUT' : 'POST',
+    method: noteId !== null ? "PUT" : "POST"
   });
   const [isDeleting, deleteNote] = useMutation({
     endpoint: `/notes/${noteId}`,
-    method: 'DELETE',
+    method: "DELETE"
   });
 
   async function handleSave() {
-    const payload = {title, body};
+    const payload = { title, body };
     const requestedLocation = {
       selectedId: noteId,
       isEditing: false,
-      searchText: location.searchText,
+      searchText: location.searchText
     };
     const response = await saveNote(payload, requestedLocation);
     navigate(response);
@@ -44,14 +44,14 @@ export default function NoteEditor({noteId, initialTitle, initialBody}) {
     const requestedLocation = {
       selectedId: null,
       isEditing: false,
-      searchText: location.searchText,
+      searchText: location.searchText
     };
     const response = await deleteNote(payload, requestedLocation);
     navigate(response);
   }
 
   function navigate(response) {
-    const cacheKey = response.headers.get('X-Location');
+    const cacheKey = response.headers.get("X-Location");
     const nextLocation = JSON.parse(cacheKey);
     const seededResponse = createFromReadableStream(response.body);
     startNavigating(() => {
@@ -63,10 +63,7 @@ export default function NoteEditor({noteId, initialTitle, initialBody}) {
   const isDraft = noteId === null;
   return (
     <div className="note-editor">
-      <form
-        className="note-editor-form"
-        autoComplete="off"
-        onSubmit={(e) => e.preventDefault()}>
+      <form className="note-editor-form" autoComplete="off" onSubmit={(e) => e.preventDefault()}>
         <label className="offscreen" htmlFor="note-title-input">
           Enter a title for your note
         </label>
@@ -95,14 +92,9 @@ export default function NoteEditor({noteId, initialTitle, initialBody}) {
             className="note-editor-done"
             disabled={isSaving || isNavigating}
             onClick={() => handleSave()}
-            role="menuitem">
-            <img
-              src="checkmark.svg"
-              width="14px"
-              height="10px"
-              alt=""
-              role="presentation"
-            />
+            role="menuitem"
+          >
+            <img src="checkmark.svg" width="14px" height="10px" alt="" role="presentation" />
             Done
           </button>
           {!isDraft && (
@@ -110,14 +102,9 @@ export default function NoteEditor({noteId, initialTitle, initialBody}) {
               className="note-editor-delete"
               disabled={isDeleting || isNavigating}
               onClick={() => handleDelete()}
-              role="menuitem">
-              <img
-                src="cross.svg"
-                width="10px"
-                height="10px"
-                alt=""
-                role="presentation"
-              />
+              role="menuitem"
+            >
+              <img src="cross.svg" width="10px" height="10px" alt="" role="presentation" />
               Delete
             </button>
           )}
@@ -132,7 +119,7 @@ export default function NoteEditor({noteId, initialTitle, initialBody}) {
   );
 }
 
-function useMutation({endpoint, method}) {
+function useMutation({ endpoint, method }) {
   const [isSaving, setIsSaving] = useState(false);
   const [didError, setDidError] = useState(false);
   const [error, setError] = useState(null);
@@ -144,18 +131,13 @@ function useMutation({endpoint, method}) {
   async function performMutation(payload, requestedLocation) {
     setIsSaving(true);
     try {
-      const response = await fetch(
-        `${endpoint}?location=${encodeURIComponent(
-          JSON.stringify(requestedLocation)
-        )}`,
-        {
-          method,
-          body: JSON.stringify(payload),
-          headers: {
-            'Content-Type': 'application/json',
-          },
+      const response = await fetch(`${endpoint}?location=${encodeURIComponent(JSON.stringify(requestedLocation))}`, {
+        method,
+        body: JSON.stringify(payload),
+        headers: {
+          "Content-Type": "application/json"
         }
-      );
+      });
       if (!response.ok) {
         throw new Error(await response.text());
       }

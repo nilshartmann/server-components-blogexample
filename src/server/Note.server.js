@@ -11,9 +11,9 @@ import {readFile} from 'react-fs';
 import {format} from 'date-fns';
 import path from 'path';
 
-import NotePreview from './NotePreview';
-import EditButton from './EditButton.client';
-import NoteEditor from './NoteEditor.client';
+import NotePreview from '../shared/NotePreview';
+import EditButton from '../client/EditButton.client';
+import NoteEditor from '../client/NoteEditor.client';
 
 export default function Note({selectedId, isEditing}) {
   const note =
