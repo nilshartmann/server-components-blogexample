@@ -10,9 +10,7 @@ import { Suspense } from "react";
 
 import PostListPage from "./server/PostListPage.server";
 import PostPage from "./server/PostPage.server";
-import PostEditorClient from "./client/PostEditor.client";
-import TagCloud from "./server/TagCloud.server";
-import LoadingIndicator from "./shared/LoadingIndicator";
+import PostEditor from "./client/PostEditor.client";
 
 /**
  * This is the entry point for components that are executed
@@ -32,7 +30,7 @@ import LoadingIndicator from "./shared/LoadingIndicator";
  */
 export default function App({ postId, editorOpen }) {
   if (editorOpen) {
-    return <PostEditorClient />;
+    return <PostEditor />;
   }
 
   return (
