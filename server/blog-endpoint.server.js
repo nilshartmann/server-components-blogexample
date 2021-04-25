@@ -10,7 +10,7 @@ function createBlogEndpoints(app) {
     handleErrors(async function(req, res) {
       const now = new Date();
       const result = await pool.query(
-        "insert into posts (title, body, date, user_id) values ($1, $2, $3, $4) returning id",
+        "insert into posts (title, body, date, user_id, tags) values ($1, $2, $3, $4, '') returning id",
         [req.body.title, req.body.body, now, "U1"]
       );
       const insertedId = result.rows[0].id;
