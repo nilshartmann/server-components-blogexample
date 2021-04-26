@@ -17,6 +17,19 @@ function createBlogEndpoints(app) {
       sendResponse(req, res, insertedId);
     })
   );
+
+  app.post(
+    "/blog/comment",
+    handleErrors(async function(req, res) {
+      console.log("SAVE", req.body);
+      const result = await pool.query("insert into comments (post_id, comment) values ($1, $2) returning id", [
+        req.body.postId,
+        req.body.comment
+      ]);
+      sendResponse(req, res);
+    })
+  );
+
   //
   //  app.put(
   //    "/notes/:id",

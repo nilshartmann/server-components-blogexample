@@ -1,5 +1,6 @@
 import moment from "moment";
 import OpenPostButton from "../client/OpenPostButton.client";
+import { CommentEditor } from "../client/CommentEditor.client";
 
 // Note that we're using moment here as an example for a 3rd party lib,
 // that might be large (in byte size) and might be better to not have it
@@ -9,7 +10,7 @@ function formattedDate(date) {
 }
 
 function postAbstract({ body }) {
-  return body.length > 50 ? body.substring(0, 50) + "..." : body;
+  return body.length > 150 ? body.substring(0, 150) + "..." : body;
 }
 
 export default function PostPreview({ post }) {
@@ -23,6 +24,15 @@ export default function PostPreview({ post }) {
         </p>
         <OpenPostButton post={post} />
       </div>
+      {post.newestcomment ? (
+        <div>
+          <p>
+            Latest comment:
+            <br /> <em>{post.newestcomment}</em>
+          </p>
+        </div>
+      ) : null}
+      <CommentEditor post={post} />
     </article>
   );
 }

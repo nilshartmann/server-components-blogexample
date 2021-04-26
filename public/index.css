@@ -183,6 +183,12 @@ article h1 {
 .PreviewAbstract {
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
+}
+
+.PreviewAbstract button {
+    white-space: nowrap;
+    margin: 1rem 0 0 1rem;
 }
 
 

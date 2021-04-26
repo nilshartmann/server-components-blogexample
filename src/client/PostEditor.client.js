@@ -4,6 +4,7 @@ import Message from "../shared/Message";
 import { createFromReadableStream } from "react-server-dom-webpack";
 import { useUpdateServerComponentCache } from "./Cache.client";
 import PageHeader from "../shared/PageHeader";
+import useSaveEntity from "./useSaveEntity.client";
 
 // EXAMPLE: if using 'shared/PageHeader' component, code splitting
 // does not work an PostEditor is included in one of the inital bundles
@@ -30,7 +31,7 @@ import PageHeader from "../shared/PageHeader";
 export default function PostEditor() {
   const updateServerComponentCache = useUpdateServerComponentCache();
   const { openHome, homeLocation, setLocationFromServerResponse } = useBlogNavigation();
-  const [isSaving, savePost] = useSavePost();
+  const [isSaving, savePost] = useSaveEntity();
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
 
@@ -44,6 +45,7 @@ export default function PostEditor() {
 
   async function handleSave() {
     const { response, location } = await savePost(
+      "/blog/post",
       {
         title,
         body
@@ -55,8 +57,8 @@ export default function PostEditor() {
     // we put it to the cache (replacing the previous ui for the
     //  returned location object)
     //
-    const seededResponse = createFromReadableStream(response);
-    updateServerComponentCache(location, seededResponse);
+
+    updateServerComponentCache(location, response);
 
     // Set new "global" location to our BlogLocationContext
     //   -> re-renders application, new UI gets visible
@@ -93,40 +95,4 @@ export default function PostEditor() {
       </div>
     </div>
   );
-}
-
-function useSavePost() {
-  const [isSaving, setIsSaving] = useState(false);
-  const [didError, setDidError] = useState(false);
-  const [error, setError] = useState(null);
-  if (didError) {
-    // Let the nearest error boundary handle errors while saving.
-    throw error;
-  }
-
-  async function savePost(newBlogPost, requestedLocation) {
-    setIsSaving(true);
-    try {
-      // Note: we POST our new blog as JSON (as we would do with REST),
-      //  but: we RECEIVE react ui code as response
-      const response = await fetch(`/blog/post?location=${encodeURIComponent(JSON.stringify(requestedLocation))}`, {
-        method: "POST",
-        body: JSON.stringify(newBlogPost),
-        headers: {
-          "Content-Type": "application/json"
-        }
-      });
-      if (!response.ok) {
-        throw new Error(await response.text());
-      }
-      return { response: response.body, location: response.headers.get("X-Location") };
-    } catch (e) {
-      setDidError(true);
-      setError(e);
-    } finally {
-      setIsSaving(false);
-    }
-  }
-
-  return [isSaving, savePost];
 }

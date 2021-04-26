@@ -41,5 +41,12 @@ export function useBlogNavigation() {
     setLocation(nextLocation);
   }
 
-  return { setLocationFromServerResponse, openHome, openPost, openEditor, homeLocation };
+  return {
+    currentLocation: location,
+    setLocationFromServerResponse,
+    openHome,
+    openPost,
+    openEditor,
+    homeLocation
+  };
 }

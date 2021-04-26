@@ -1,8 +1,7 @@
 import { useBlogNavigation, useCurrentLocation } from "./useNavigation.client";
 
 export default function OrderByButton({ orderBy }) {
-  const currentLocation = useCurrentLocation();
-  const { openHome } = useBlogNavigation();
+  const { openHome, currentLocation } = useBlogNavigation();
 
   const label = orderBy === "dateDesc" ? "Desc" : "Asc";
 

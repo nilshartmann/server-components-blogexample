@@ -7,9 +7,9 @@ export default function PostList({ orderBy }) {
   //      Database Access in our Component :-/
   // 😱   😱   😱   😱   😱   😱
   //
-  const blogPostRows = db.query(`select *
-                                 from posts
-                                 order by date ${orderBy === "dateDesc" ? "desc" : "asc"}`).rows;
+  const blogPostRows = db.query(`SELECT * FROM posts p 
+    LEFT JOIN LATERAL (SELECT c.comment as newestcomment from comments AS c WHERE c.post_id = p.id ORDER BY c.id DESC LIMIT 1) x ON true 
+    ORDER BY p.date ${orderBy === "dateDesc" ? "desc" : "asc"}`).rows;
   const blogPosts = blogPostRows.map(asPlainBlogObject);
 
   //     Change Suspense Component in PostListPage
@@ -19,7 +19,9 @@ export default function PostList({ orderBy }) {
     <div>
       <div className={"PostList"}>
         {blogPosts.map((p) => (
-          <PostPreview key={p.id} post={p} />
+          <div key={p.id}>
+            <PostPreview post={p} />
+          </div>
         ))}
       </div>
     </div>

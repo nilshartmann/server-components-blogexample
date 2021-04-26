@@ -7,7 +7,7 @@
  */
 
 import { unstable_getCacheForType, unstable_useCacheRefresh } from "react";
-import { createFromFetch } from "react-server-dom-webpack";
+import { createFromFetch, createFromReadableStream } from "react-server-dom-webpack";
 
 /**
  * Contains all UI fragments read from the server.
@@ -23,13 +23,13 @@ function createResponseCache() {
  */
 export function useUpdateServerComponentCache() {
   const refreshCache = unstable_useCacheRefresh();
-  return function updateCache(key, seededResponse) {
+  return function updateCache(key, response) {
+    const seededResponse = createFromReadableStream(response);
     refreshCache(createResponseCache, new Map([[key, seededResponse]]));
   };
 }
 
 export function useServerComponent(location) {
-  console.log("location", location);
   const key = JSON.stringify(location);
   const cache = unstable_getCacheForType(createResponseCache);
   let response = cache.get(key);
