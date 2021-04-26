@@ -7,6 +7,7 @@ export default function TagCloud() {
                             from posts`).rows;
   const tags = tagRows
     .flatMap((row) => row.tags.split(","))
+    .filter((tag) => !!tag) // filter out empty tags
     .reduce((tags, tag) => {
       const count = tags[tag] || 0;
       tags[tag] = count + 1;

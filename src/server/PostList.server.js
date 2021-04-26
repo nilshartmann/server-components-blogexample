@@ -7,7 +7,7 @@ export default function PostList() {
   //      Database Access in our Component :-/
   // 😱   😱   😱   😱   😱   😱
   //
-  const blogPostRows = db.query(`select * from posts order by id desc`).rows;
+  const blogPostRows = db.query(`select * from posts order by date desc`).rows;
   const blogPosts = blogPostRows.map(asPlainBlogObject);
 
   // Now let's see how the Suspense boundary above lets us not block on this.
