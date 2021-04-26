@@ -29,7 +29,8 @@ function sendResponse(req, res, redirectToId) {
   res.set("X-Location", JSON.stringify(location));
   renderReactTree(res, {
     postId: location.postId,
-    editorOpen: location.editorOpen
+    editorOpen: location.editorOpen,
+    orderBy: location.orderBy
   });
 }
 

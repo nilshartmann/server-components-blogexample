@@ -15,11 +15,11 @@ export default function Post({ post }) {
     <article className="Container">
       <p className="Date">{formattedDate(post.date)}</p>
       <h1>{post.title}</h1>
-      <p>
+      <div>
         {post.body.split("\\n").map((p, ix) => (
           <p key={ix}>{p}</p>
         ))}
-      </p>
+      </div>
     </article>
   );
 }

@@ -104,6 +104,23 @@ button:hover:disabled {
   cursor: default;
 }
 
+.ButtonBar {
+    display: flex;
+    justify-content: end;
+    margin-top: 1.5rem;
+}
+
+.ButtonBar button {
+    font-size: 0.8rem;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 0.3rem 0.8rem;
+}
+
+.ButtonBar button:last-child {
+    margin-right: 0;
+}
+
 label {
   margin-bottom: 1rem;
   color: var(--color-main);
@@ -149,7 +166,7 @@ label {
 }
 
 .Container:first-child {
-  margin-top: 1.5rem;
+    margin-top: 1.5rem;
 }
 
 .Container h1 {

@@ -29,6 +29,7 @@ export function useUpdateServerComponentCache() {
 }
 
 export function useServerComponent(location) {
+  console.log("location", location);
   const key = JSON.stringify(location);
   const cache = unstable_getCacheForType(createResponseCache);
   let response = cache.get(key);

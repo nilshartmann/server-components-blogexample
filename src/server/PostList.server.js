@@ -2,17 +2,26 @@ import { asPlainBlogObject, db } from "./db.server";
 import PostPreview from "../shared/PostPreview";
 import { fetch } from "react-fetch";
 
-export default function PostList() {
+export default function PostList({ orderBy }) {
   // 😱   😱   😱   😱   😱   😱
   //      Database Access in our Component :-/
   // 😱   😱   😱   😱   😱   😱
   //
-  const blogPostRows = db.query(`select * from posts order by date desc`).rows;
+  const blogPostRows = db.query(`select *
+                                 from posts
+                                 order by date ${orderBy === "dateDesc" ? "desc" : "asc"}`).rows;
   const blogPosts = blogPostRows.map(asPlainBlogObject);
 
-  // Now let's see how the Suspense boundary above lets us not block on this.
-  // DEMO STEP 2: sleep here
-  //  fetch("http://localhost:4000/sleep/2000");
+  //     Change Suspense Component in PostListPage
+  // fetch("http://localhost:4000/sleep/2000");
 
-  return blogPosts.map((p) => <PostPreview key={p.id} post={p} />);
+  return (
+    <div>
+      <div className={"PostList"}>
+        {blogPosts.map((p) => (
+          <PostPreview key={p.id} post={p} />
+        ))}
+      </div>
+    </div>
+  );
 }

@@ -1,6 +1,11 @@
 import { useContext } from "react";
 import { BlogLocationContext } from "./BlogLocationContext.client";
 
+export function useCurrentLocation() {
+  const [location] = useContext(BlogLocationContext);
+  return location;
+}
+
 /**
  * A client-side hook that provides functions to update the global location object
  * (from BlogLocationContext)
@@ -15,8 +20,12 @@ export function useBlogNavigation() {
     return { ...location, postId: null, editorOpen: false };
   }
 
-  function openHome() {
-    return setLocation(homeLocation());
+  function openHome(orderBy) {
+    const newLocation = homeLocation();
+    if (typeof orderBy === "string") {
+      newLocation.orderBy = orderBy;
+    }
+    return setLocation(newLocation);
   }
 
   function openPost(postId) {

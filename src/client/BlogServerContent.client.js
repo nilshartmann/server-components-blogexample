@@ -39,7 +39,8 @@ import { BlogLocationContext } from "./BlogLocationContext.client";
 export default function BlogServerContent() {
   const [location, setLocation] = useState({
     postId: null,
-    editorOpen: false
+    editorOpen: false,
+    orderBy: "dateDesc"
   });
 
   // Receive the server side rendered parts of the UI:

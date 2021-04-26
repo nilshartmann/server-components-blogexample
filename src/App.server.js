@@ -28,7 +28,7 @@ import PostEditor from "./client/PostEditor.client";
  *   properties and passes them to App
  *
  */
-export default function App({ postId, editorOpen }) {
+export default function App({ postId, editorOpen, orderBy }) {
   if (editorOpen) {
     return <PostEditor />;
   }
@@ -37,7 +37,7 @@ export default function App({ postId, editorOpen }) {
     <div className={"App"}>
       {postId === null ? (
         <Suspense fallback={"Post List Loading..."}>
-          <PostListPage />
+          <PostListPage orderBy={orderBy} />
         </Suspense>
       ) : (
         <Suspense fallback={"Blog Post Loading ..."}>
