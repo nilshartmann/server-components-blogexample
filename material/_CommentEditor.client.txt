@@ -1,0 +1,14 @@
+import { useState } from "react";
+
+export function CommentEditor({ post }) {
+  const [comment, setComment] = useState("");
+
+  return (
+    <div>
+      <label>
+        Add your comment
+        <input value={comment} onChange={(e) => setComment(e.target.value)} />
+      </label>
+    </div>
+  );
+}
