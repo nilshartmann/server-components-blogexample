@@ -1,0 +1,19 @@
+  const { setLocationFromServerResponse, currentLocation } = useBlogNavigation();
+  const updateCache = useUpdateServerComponentCache();
+  const [isSaving, save] = useSaveEntity();
+
+  async function handleSave() {
+    const { response, location } = await save(
+      "/blog/comment",
+      {
+        comment,
+        postId: post.id
+      },
+
+      // "Props" for server
+      currentLocation
+    );
+
+    // todo: updateCache
+    // todo: setLocationFromResponse
+  }

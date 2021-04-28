@@ -15,7 +15,7 @@ babelRegister({
         }
       }
 
-      console.log("path ", path, " -> do NOT ignore");
+      //      console.log("path ", path, " -> do NOT ignore");
       return false;
     }
   ],

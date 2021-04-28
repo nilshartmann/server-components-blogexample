@@ -6,7 +6,7 @@ export function CommentEditor({ post }) {
   return (
     <div>
       <label>
-        Add your comment
+        Add your comment for {post.title}
         <input value={comment} onChange={(e) => setComment(e.target.value)} />
       </label>
     </div>
