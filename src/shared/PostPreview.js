@@ -1,5 +1,6 @@
 import moment from "moment";
 import OpenPostButton from "../client/OpenPostButton.client";
+import { CommentEditor } from "../client/CommentEditor.client";
 
 // Note that we're using moment here as an example for a 3rd party lib,
 // that might be large (in byte size) and might be better to not have it
@@ -24,6 +25,7 @@ export default function PostPreview({ post }) {
         <OpenPostButton post={post} />
       </div>
       <NewestComment post={post} />
+      <CommentEditor post={post} />
     </article>
   );
 }

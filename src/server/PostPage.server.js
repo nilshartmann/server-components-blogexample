@@ -2,6 +2,7 @@ import { asPlainBlogObject, db } from "./db.server";
 import PageHeader from "../shared/PageHeader";
 import Post from "../shared/Post";
 import HomeButton from "../client/HomeButton.client";
+import PostComments from "./PostComments.server";
 
 export default function PostPage({ postId }) {
   // 😱   😱   😱   😱   😱   😱
@@ -14,6 +15,7 @@ export default function PostPage({ postId }) {
     <>
       <PageHeader button={<HomeButton />}>Blog Post</PageHeader>
       <Post post={post} />
+      <PostComments post={post} />
     </>
   );
 }
