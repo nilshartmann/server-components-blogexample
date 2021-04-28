@@ -38,4 +38,12 @@ npm start
 
 The server runs on port **4001**, so make sure this port is also free.
 
+## Talk on Server Components
 
+Find my talk about Server Components here [as PDF](https://react.schule/wdc2021-server-components) (in german).
+
+## Blog Example Application UI
+
+![Screenshot of the example application](screenshot-blog.png)
+
+Twitter: [@nilshartmann](https://twitter.com/nilshartmann)
