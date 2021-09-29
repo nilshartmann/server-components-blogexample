@@ -1,18 +1,23 @@
 import { useBlogNavigation } from "./useNavigation.client";
-import { useTransition } from "react";
+import { useTransition, useState } from "react";
+import LoadingIndicator from "../shared/LoadingIndicator";
 
-export default function OpenPostButton({ post, label = "Read this Blog Post" }) {
+export default function OpenPostButton({ post, label = "Read this Post" }) {
   const { openPost } = useBlogNavigation();
   const [isPending, startTransition] = useTransition();
 
   return (
-    <button
-      disabled={isPending}
-      onClick={() => {
-        startTransition(() => openPost(post.id));
-      }}
-    >
-      {label}
-    </button>
+    <>
+      <button
+        className={"PendingButton"}
+        disabled={isPending}
+        onClick={() => {
+          startTransition(() => openPost(post.id));
+        }}
+      >
+        {isPending && <LoadingIndicator secondary />}
+        {isPending || label}
+      </button>
+    </>
   );
 }

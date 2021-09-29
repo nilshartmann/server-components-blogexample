@@ -104,6 +104,13 @@ button:hover:disabled {
   cursor: default;
 }
 
+.PendingButton:disabled {
+    color: var(--color-main);
+    background-color: var(--color-white);
+    box-shadow: var(--color-main) 0px 0px 0px 2px inset;
+
+}
+
 .ButtonBar {
     display: flex;
     justify-content: end;
@@ -192,6 +199,7 @@ article h1 {
 }
 
 
+
 .Page {
     display: flex;
     align-items: flex-start;
@@ -220,6 +228,7 @@ article h1 {
     padding: 0 0.5rem 0.5rem 0.5rem;
     font-size: 50%;
 }
+
 
 .TagCloud {
     text-align: center;
@@ -262,6 +271,11 @@ article h1 {
     padding: 0 2rem 1rem 2rem;
 }
 
+
+.Spinner.secondary {
+    padding: 0
+}
+
 .Spinner h1 {
     font-size: 1.5rem;
 }
@@ -278,6 +292,12 @@ article h1 {
     animation: sk-bouncedelay 1.4s infinite ease-in-out both;
 }
 
+.Spinner.secondary >.bounce {
+    width: 1rem;
+    height: 1rem;
+    background-color: var(--color-primary);
+}
+
 .Spinner .bounce1 {
     -webkit-animation-delay: -0.32s;
     animation-delay: -0.32s;
@@ -286,6 +306,10 @@ article h1 {
 .Spinner .bounce2 {
     -webkit-animation-delay: -0.16s;
     animation-delay: -0.16s;
+}
+
+.Spinner.secondary .bounce3 {
+    margin-right:0;
 }
 
 @-webkit-keyframes sk-bouncedelay {
