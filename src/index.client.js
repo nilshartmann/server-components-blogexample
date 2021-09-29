@@ -6,15 +6,10 @@
  *
  */
 
-import { unstable_createRoot } from "react-dom";
+import { hydrateRoot } from "react-dom";
 import Root from "./Root.client";
 
 // THIS IS WERE OUR APPLICATION STARTS
 //   same as with "regular" React apps
-//   only that we're using Concurrent Mode here (which is also still unstable)
-
-// unstable createRoot enables Concurrent Mode (more a less replacement for ReactDOM.render)
-// https://reactjs.org/docs/concurrent-mode-adoption.html#enabling-concurrent-mode
-const root = unstable_createRoot(document.getElementById("root"));
-
-root.render(<Root />);
+//   https://reactjs.org/docs/react-dom.html#hydrate
+hydrateRoot(document.getElementById("root"), <Root />);

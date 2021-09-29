@@ -20,7 +20,6 @@ For more informations about the **original example**, please see `README-notes` 
 The example uses a Postgres database, that runs in a docker container. To start it, simply run:
 
 ```
-cd docker_blog_app
 docker-compose -f docker-compose.yml up -d
 ```
 
