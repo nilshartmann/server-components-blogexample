@@ -5,6 +5,7 @@ import { createFromReadableStream } from "react-server-dom-webpack";
 import { useUpdateServerComponentCache } from "./Cache.client";
 import PageHeader from "../shared/PageHeader";
 import useSaveEntity from "./useSaveEntity.client";
+import Post from "../shared/Post";
 
 // EXAMPLE: if using 'shared/PageHeader' component, code splitting
 // does not work an PostEditor is included in one of the inital bundles
@@ -93,6 +94,12 @@ export default function PostEditor() {
           Save Post
         </button>
       </div>
+      {(title || body) && (
+        <div className={"Container PostEditorPreview"}>
+          <h2>Preview: Your new Post</h2>
+          <Post post={{ title, body }} />
+        </div>
+      )}
     </div>
   );
 }

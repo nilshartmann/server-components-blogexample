@@ -1,6 +1,7 @@
 import { tagCloud as createTagCloud } from "tag-cloud"; // 4kb lib which is not transferred to server
 import { fetch } from "react-fetch";
 import { db } from "./db.server";
+import delay from "./delay.server.js";
 
 export default function TagCloud() {
   const tagRows = db.query(`select tags
@@ -20,8 +21,9 @@ export default function TagCloud() {
     { numBuckets: 4, classPrefix: "TagCloud--tag-" }
   );
 
-  // DEMO STEP 1: ADD SLEEP HERE
-  // fetch("http://localhost:4000/sleep/3000");
+  if (delay.tagCloud) {
+    fetch("http://localhost:4001/sleep/3000");
+  }
 
   return (
     <>

@@ -25,7 +25,7 @@ export default function PostPreview({ post }) {
         <OpenPostButton post={post} />
       </div>
       <NewestComment post={post} />
-      <CommentEditor post={post} />
+      {/*<CommentEditor post={post} />*/}
     </article>
   );
 }

@@ -13,7 +13,7 @@ function formattedDate(date) {
 export default function Post({ post }) {
   return (
     <article className="Container">
-      <p className="Date">{formattedDate(post.date)}</p>
+      {post.date && <p className="Date">{formattedDate(post.date)}</p>}
       <h1>{post.title}</h1>
       <div>
         {post.body.split("\\n").map((p, ix) => (
