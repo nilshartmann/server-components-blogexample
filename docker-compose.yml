@@ -1,6 +1,6 @@
 version: "3"
 services:
-  postgres:
+  postgres_blog:
     image: postgres:13.2
     container_name: blog_db
     ports:
@@ -10,5 +10,5 @@ services:
       - POSTGRES_USER=klaus
       - POSTGRES_DB=blog_db
     volumes:
-      - ./init-blog-db.sql:/docker-entrypoint-initdb.d/init-blog-db.sql
-      - ./db-data:/var/lib/postgresql/data
+      - ./docker/init-blog-db.sql:/docker-entrypoint-initdb.d/init-blog-db.sql
+      - ./docker/db-data:/var/lib/postgresql/data
