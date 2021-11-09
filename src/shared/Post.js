@@ -1,25 +1,21 @@
-import moment from "moment"; // ~ 23kb
+import moment from "moment"; // 290 K (gzipped: 72K)
+import marked from "marked"; // 36 K (gzipped: 11 K)
 
 // As long as this shared component is only used on server-side the
-//  moment is not deliverd to the client => saving bandwith
+//  external libs (moment and marked) are not deliverd to the client => saving bandwith
 //
 // React only sends code for this component to the client only,
-//  when the client on runtime requests it
-//  (which is never the case in our example)
-function formattedDate(date) {
-  return moment(date).format("DD.MM.YYYY");
-}
+//  when the client on runtime requests it (=> inside PostEditor)
 
 export default function Post({ post }) {
+  const date = moment(post.date).format("DD.MM.YYYY");
+  const body = marked.parse(post.body);
+
   return (
     <article className="Container">
-      {post.date && <p className="Date">{formattedDate(post.date)}</p>}
+      {post.date && <p className="Date">{date}</p>}
       <h1>{post.title}</h1>
-      <div>
-        {post.body.split("\\n").map((p, ix) => (
-          <p key={ix}>{p}</p>
-        ))}
-      </div>
+      <div dangerouslySetInnerHTML={{ __html: body }} />
     </article>
   );
 }
