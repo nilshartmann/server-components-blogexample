@@ -9,7 +9,7 @@ import ButtonBar from "../shared/ButtonBar";
 
 export default function PostListPage({ orderBy }) {
   return (
-    <>
+    <div className={"PostListPage"}>
       <PageHeader button={<OpenPostEditorButton />}>Blog Posts</PageHeader>
       <div className={"Page"}>
         <div className={"Main"}>
@@ -27,6 +27,6 @@ export default function PostListPage({ orderBy }) {
           </Suspense>
         </aside>
       </div>
-    </>
+    </div>
   );
 }

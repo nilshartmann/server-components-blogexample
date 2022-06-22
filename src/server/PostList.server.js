@@ -4,9 +4,9 @@ import { fetch } from "react-fetch";
 import delay from "./delay.server.js";
 
 export default function PostList({ orderBy }) {
-  // 😱   😱   😱   😱   😱   😱
+  // 😱   😱   😱   😱   😱   😱   😱   😱   😱   😱   😱   😱
   //      Database Access in our Component :-/
-  // 😱   😱   😱   😱   😱   😱
+  // 😱   😱   😱   😱   😱   😱   😱   😱   😱   😱   😱   😱
   //
   const blogPostRows = db.query(`SELECT *
                                  FROM posts p
