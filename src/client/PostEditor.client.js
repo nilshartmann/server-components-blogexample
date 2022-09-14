@@ -94,12 +94,10 @@ export default function PostEditor() {
           Save Post
         </button>
       </div>
-      {(title || body) && (
-        <div className={"Container PostEditorPreview"}>
-          <h2>Preview: Your new Post</h2>
-          <Post post={{ title, body }} />
-        </div>
-      )}
+      <div className={"Container PostEditorPreview"}>
+        <h2>Preview: Your new Post</h2>
+        <Post post={{ title, body }} />
+      </div>
     </div>
   );
 }

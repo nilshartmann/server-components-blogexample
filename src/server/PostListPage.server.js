@@ -18,11 +18,14 @@ export default function PostListPage({ orderBy }) {
               <OrderByButton orderBy={"dateDesc"} />
               <OrderByButton orderBy={"dateAsc"} />
             </ButtonBar>
+
+            {/*  SERVER COMPONENT */}
             <PostList orderBy={orderBy} />
           </Suspense>
         </div>
         <aside className={"Sidebar"}>
           <Suspense fallback={<LoadingIndicator />}>
+            {/*  SERVER COMPONENT */}
             <TagCloud />
           </Suspense>
         </aside>
