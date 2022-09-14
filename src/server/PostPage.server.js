@@ -8,9 +8,9 @@ import { fetch } from "react-fetch";
 import delay from "./delay.server.js";
 import LoadingIndicator from "../shared/LoadingIndicator";
 
-function Suspense({ children }) {
-  return children;
-}
+//function Suspense({ children }) {
+//  return children;
+//}
 
 export default function PostPage({ postId }) {
   return (
