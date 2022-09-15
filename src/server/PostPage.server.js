@@ -1,4 +1,4 @@
-//import { Suspense } from "react";
+import { Suspense } from "react";
 import { asPlainBlogObject, db } from "./db.server";
 import PageHeader from "../shared/PageHeader";
 import Post from "../shared/Post";
